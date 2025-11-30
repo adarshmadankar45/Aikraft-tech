@@ -8,11 +8,11 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
 
     <!-- Css -->
     <link rel="stylesheet" href="css/index.css">
-
 
 
     <!-- Tailwind CSS -->
@@ -60,567 +60,705 @@
         }
         .animate-float-slow {
             animation: float-up-down 4s ease-in-out infinite;
-        }</script>
+        }
+    </script>
 </head>
 <body class="antialiased">
 
-    <!-- Loader -->
-    <div id="loader">
-        <div class="relative flex items-center justify-center mb-4">
-            <div class="loader-circuit"></div>
-            <div class="absolute font-display font-bold text-3xl text-white tracking-widest">AK</div>
+<!-- Loader -->
+<div id="loader">
+    <div class="relative flex items-center justify-center mb-4">
+        <div class="loader-circuit"></div>
+        <div class="absolute font-display font-bold text-3xl text-white tracking-widest">AK</div>
+    </div>
+    <div class="text-brand-accent font-mono text-sm tracking-[0.3em] uppercase animate-pulse">Initializing Core...</div>
+</div>
+
+<!-- 3D Background Canvas -->
+<div id="canvas-container"></div>
+
+<!-- Navigation -->
+<nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="flex items-center gap-2 group">
+            <!-- Logo Simulation -->
+            <div class="relative w-10 h-10 flex items-center justify-center">
+                <img src="images/logo.png" alt="AiKraft Logo" class="w-full h-full object-contain">
+            </div>
+            <div class="flex flex-col">
+                <span class="font-display font-bold text-xl tracking-wide text-white group-hover:text-brand-accent transition-colors">AiKraft</span>
+                <span class="text-[0.6rem] uppercase tracking-widest text-gray-400">Technologies</span>
+            </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#home"
+               class="text-sm font-medium text-gray-300 hover:text-brand-accent transition-colors uppercase tracking-wider">Home</a>
+            <a href="about.html"
+               class="text-sm font-medium text-gray-300 hover:text-brand-accent transition-colors uppercase tracking-wider">About</a>
+            <a href="services.html"
+               class="text-sm font-medium text-gray-300 hover:text-brand-accent transition-colors uppercase tracking-wider">Services</a>
+            <a href="projects.html"
+               class="text-sm font-medium text-gray-300 hover:text-brand-accent transition-colors uppercase tracking-wider">Project</a>
+            <a href="#contact"
+               class="px-6 py-2 border border-brand-accent text-brand-accent text-sm font-bold uppercase tracking-wider rounded hover:bg-brand-accent hover:text-black transition-all duration-300 shadow-[0_0_10px_rgba(6,182,212,0.2)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)]">
+                Let's Talk
+            </a>
         </div>
-        <div class="text-brand-accent font-mono text-sm tracking-[0.3em] uppercase animate-pulse">Initializing Core...</div>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-white hover:text-brand-accent" onclick="toggleMobileMenu()">
+            <i data-lucide="menu" class="w-8 h-8"></i>
+        </button>
     </div>
 
-    <!-- 3D Background Canvas -->
-    <div id="canvas-container"></div>
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+         class="fixed inset-0 bg-brand-dark/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 md:hidden">
+        <button class="absolute top-6 right-6 text-white" onclick="toggleMobileMenu()">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="#home" class="text-2xl font-display font-bold text-white hover:text-brand-accent"
+           onclick="toggleMobileMenu()">Home</a>
+        <a href="#about" class="text-2xl font-display font-bold text-white hover:text-brand-accent"
+           onclick="toggleMobileMenu()">About</a>
+        <a href="projects.html" class="text-2xl font-display font-bold text-white hover:text-brand-accent"
+           onclick="toggleMobileMenu()">Project</a>
+        <a href="#contact" class="text-2xl font-display font-bold text-brand-accent" onclick="toggleMobileMenu()">Contact
+            Us</a>
+    </div>
+</nav>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center gap-2 group">
-                <!-- Logo Simulation -->
-                <div class="relative w-10 h-10 flex items-center justify-center">
-                    <img src="images/logo.png" alt="AiKraft Logo" class="w-full h-full object-contain">
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-display font-bold text-xl tracking-wide text-white group-hover:text-brand-accent transition-colors">AiKraft</span>
-                    <span class="text-[0.6rem] uppercase tracking-widest text-gray-400">Technologies</span>
-                </div>
-            </a>
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Decorative Glows -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-accent/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-secondary/20 rounded-full blur-[100px] pointer-events-none"></div>
 
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#home" class="text-sm font-medium text-gray-300 hover:text-brand-accent transition-colors uppercase tracking-wider">Home</a>
-                <a href="about.html" class="text-sm font-medium text-gray-300 hover:text-brand-accent transition-colors uppercase tracking-wider">About</a>
-                <a href="services.html" class="text-sm font-medium text-gray-300 hover:text-brand-accent transition-colors uppercase tracking-wider">Services</a>
-                <a href="projects.html" class="text-sm font-medium text-gray-300 hover:text-brand-accent transition-colors uppercase tracking-wider">Project</a>
-                <a href="#contact" class="px-6 py-2 border border-brand-accent text-brand-accent text-sm font-bold uppercase tracking-wider rounded hover:bg-brand-accent hover:text-black transition-all duration-300 shadow-[0_0_10px_rgba(6,182,212,0.2)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)]">
-                    Let's Talk
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="inline-block px-4 py-1 mb-6 border border-brand-accent/30 rounded-full bg-brand-accent/10 backdrop-blur-md gs-reveal animate-float-slow">
+                <span class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em]">Next Gen Software Development</span>
+            </div>
+
+            <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-8 gs-reveal">
+                Forging The <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-white to-brand-secondary animate-gradient-x">Digital Future</span>
+            </h1>
+
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed gs-reveal">
+                AiKraft Technologies engineers premium, AI-driven software solutions. We transform complex visions into
+                elegant, high-performance digital realities.
+            </p>
+
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center gs-reveal">
+                <a href="#contact"
+                   class="btn-neon px-8 py-4 bg-brand-accent text-brand-dark font-bold rounded text-lg flex items-center gap-2">
+                    Start Project <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#services"
+                   class="px-8 py-4 border border-gray-700 text-white font-medium rounded text-lg hover:border-brand-accent hover:text-brand-accent transition-all flex items-center gap-2 glass-card">
+                    <i data-lucide="layers" class="w-5 h-5"></i> View Services
                 </a>
             </div>
 
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-white hover:text-brand-accent" onclick="toggleMobileMenu()">
-                <i data-lucide="menu" class="w-8 h-8"></i>
-            </button>
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-800 pt-10 gs-reveal">
+                <div>
+                    <h3 class="text-4xl font-bold text-brand-accent">98%</h3>
+                    <p class="text-sm text-gray-500 uppercase tracking-wider mt-2">Client Satisfaction</p>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-bold text-white">50+</h3>
+                    <p class="text-sm text-gray-500 uppercase tracking-wider mt-2">Projects Delivered</p>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-bold text-white">24/7</h3>
+                    <p class="text-sm text-gray-500 uppercase tracking-wider mt-2">Support System</p>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-bold text-brand-secondary">Global</h3>
+                    <p class="text-sm text-gray-500 uppercase tracking-wider mt-2">Client Base</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 bg-brand-dark/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 md:hidden">
-            <button class="absolute top-6 right-6 text-white" onclick="toggleMobileMenu()">
-                <i data-lucide="x" class="w-8 h-8"></i>
-            </button>
-            <a href="#home" class="text-2xl font-display font-bold text-white hover:text-brand-accent" onclick="toggleMobileMenu()">Home</a>
-            <a href="#about" class="text-2xl font-display font-bold text-white hover:text-brand-accent" onclick="toggleMobileMenu()">About</a>
-            <a href="projects.html" class="text-2xl font-display font-bold text-white hover:text-brand-accent" onclick="toggleMobileMenu()">Project</a>
-            <a href="#contact" class="text-2xl font-display font-bold text-brand-accent" onclick="toggleMobileMenu()">Contact Us</a>
-        </div>
-    </nav>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-            <!-- Decorative Glows -->
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-accent/20 rounded-full blur-[100px] pointer-events-none"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-secondary/20 rounded-full blur-[100px] pointer-events-none"></div>
-
-            <div class="container mx-auto px-6 relative z-10 text-center">
-                <div class="inline-block px-4 py-1 mb-6 border border-brand-accent/30 rounded-full bg-brand-accent/10 backdrop-blur-md gs-reveal animate-float-slow">
-                    <span class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em]">Next Gen Software Development</span>
-                </div>
-
-                <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-8 gs-reveal">
-                    Forging The <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-white to-brand-secondary animate-gradient-x">Digital Future</span>
-                </h1>
-
-                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed gs-reveal">
-                    AiKraft Technologies engineers premium, AI-driven software solutions. We transform complex visions into elegant, high-performance digital realities.
-                </p>
-
-                <div class="flex flex-col md:flex-row gap-6 justify-center items-center gs-reveal">
-                    <a href="#contact" class="btn-neon px-8 py-4 bg-brand-accent text-brand-dark font-bold rounded text-lg flex items-center gap-2">
-                        Start Project <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#services" class="px-8 py-4 border border-gray-700 text-white font-medium rounded text-lg hover:border-brand-accent hover:text-brand-accent transition-all flex items-center gap-2 glass-card">
-                        <i data-lucide="layers" class="w-5 h-5"></i> View Services
-                    </a>
-                </div>
-
-                <!-- Stats -->
-                <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-800 pt-10 gs-reveal">
-                    <div>
-                        <h3 class="text-4xl font-bold text-brand-accent">98%</h3>
-                        <p class="text-sm text-gray-500 uppercase tracking-wider mt-2">Client Satisfaction</p>
-                    </div>
-                    <div>
-                        <h3 class="text-4xl font-bold text-white">50+</h3>
-                        <p class="text-sm text-gray-500 uppercase tracking-wider mt-2">Projects Delivered</p>
-                    </div>
-                    <div>
-                        <h3 class="text-4xl font-bold text-white">24/7</h3>
-                        <p class="text-sm text-gray-500 uppercase tracking-wider mt-2">Support System</p>
-                    </div>
-                    <div>
-                        <h3 class="text-4xl font-bold text-brand-secondary">Global</h3>
-                        <p class="text-sm text-gray-500 uppercase tracking-wider mt-2">Client Base</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-24 relative">
-            <div class="container mx-auto px-6">
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="relative gs-reveal-left">
-                        <div class="absolute -inset-4 bg-gradient-to-r from-brand-accent to-brand-secondary opacity-30 blur-lg rounded-2xl"></div>
-                        <div class="relative rounded-2xl overflow-hidden border border-gray-800 bg-brand-dark aspect-video flex items-center justify-center group">
-                            <!-- Placeholder for an actual about image, using a pattern here -->
-                            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-60 group-hover:scale-110 transition-transform duration-700"></div>
-                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
-                            <div class="relative z-10 p-8">
-                                <i data-lucide="code-2" class="w-16 h-16 text-brand-accent mb-4"></i>
-                                <h3 class="text-2xl font-bold text-white">Code Excellence</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gs-reveal-right">
-                        <h2 class="text-brand-accent font-mono text-sm tracking-widest uppercase mb-4">About AiKraft</h2>
-                        <h3 class="text-4xl md:text-5xl font-display font-bold mb-6">Innovating Beyond Boundaries</h3>
-                        <p class="text-gray-400 leading-relaxed mb-6">
-                            At AiKraft Technologies, we don't just write code; we architect ecosystems. Born from a passion for Artificial Intelligence and seamless UX, we bridge the gap between human creativity and machine efficiency.
-                        </p>
-                        <p class="text-gray-400 leading-relaxed mb-8">
-                            Our team comprises elite visionaries, full-stack engineers, and design thinkers dedicated to propelling your business into the future.
-                        </p>
-
-                        <ul class="space-y-4">
-                            <li class="flex items-center gap-3">
-                                <span class="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_#06B6D4]"></span>
-                                <span class="text-gray-300">AI-Integrated Workflows</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <span class="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_#06B6D4]"></span>
-                                <span class="text-gray-300">Scalable Cloud Architectures</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <span class="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_#06B6D4]"></span>
-                                <span class="text-gray-300">Immersive UI/UX Design</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="py-24 bg-brand-primary/30 relative">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 gs-reveal">
-                    <h2 class="text-brand-accent font-mono text-sm tracking-widest uppercase mb-4">Our Expertise</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold">Premium Services</h3>
-                </div>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-                    <!-- Updated: Web Design & Development Service -->
-                    <div class="glass-card p-8 rounded-2xl group cursor-pointer tilt-card gs-reveal-up">
-                        <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 transition-colors">
-                            <i data-lucide="layout" class="w-8 h-8 text-brand-accent"></i>
-                        </div>
-                        <h4 class="text-xl font-bold mb-4 group-hover:text-brand-accent transition-colors">Web Design & Development</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            We create stunning, responsive websites that not only look incredible but perform exceptionally across all devices. Our designs blend aesthetics with functionality to deliver seamless user experiences.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Responsive Design</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">E-commerce</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">CMS Integration</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">SEO Optimization</span>
-                        </div>
-                        <a href="services.html" class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                            Learn More <i data-lucide="arrow-right" class="w-4 h-4 text-brand-accent"></i>
-                        </a>
-                    </div>
-
-                    <!-- Updated: Software Development -->
-                    <div class="glass-card p-8 rounded-2xl group cursor-pointer tilt-card gs-reveal-up" style="animation-delay: 0.1s;">
-                        <div class="w-14 h-14 bg-brand-secondary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-secondary/20 transition-colors">
-                            <i data-lucide="code-2" class="w-8 h-8 text-brand-secondary"></i>
-                        </div>
-                        <h4 class="text-xl font-bold mb-4 group-hover:text-brand-secondary transition-colors">Software Development</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            Bespoke software solutions engineered to solve your unique business challenges. From enterprise applications to specialized tools, we build scalable, secure, and high-performance software.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Web Applications</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Mobile Apps</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">API Development</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Database Design</span>
-                        </div>
-                        <a href="services.html" class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                            Learn More <i data-lucide="arrow-right" class="w-4 h-4 text-brand-secondary"></i>
-                        </a>
-                    </div>
-
-                    <!-- Updated: UI/UX Design -->
-                    <div class="glass-card p-8 rounded-2xl group cursor-pointer tilt-card gs-reveal-up" style="animation-delay: 0.2s;">
-                        <div class="w-14 h-14 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition-colors">
-                            <i data-lucide="palette" class="w-8 h-8 text-purple-400"></i>
-                        </div>
-                        <h4 class="text-xl font-bold mb-4 group-hover:text-purple-400 transition-colors">UI/UX Design</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            User-centered design that creates intuitive, engaging experiences. We combine research, psychology, and aesthetics to design interfaces that users love and businesses benefit from.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">User Research</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Wireframing</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Prototyping</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Usability Testing</span>
-                        </div>
-                        <a href="services.html" class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                            Learn More <i data-lucide="arrow-right" class="w-4 h-4 text-purple-400"></i>
-                        </a>
-                    </div>
-
-                    <!-- Updated: Maintenance & Support -->
-                    <div class="glass-card p-8 rounded-2xl group cursor-pointer tilt-card gs-reveal-up">
-                        <div class="w-14 h-14 bg-green-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-500/20 transition-colors">
-                            <i data-lucide="settings" class="w-8 h-8 text-green-400"></i>
-                        </div>
-                        <h4 class="text-xl font-bold mb-4 group-hover:text-green-400 transition-colors">Maintenance & Support</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            Ongoing support and maintenance to keep your digital solutions running smoothly. We ensure your applications stay updated, secure, and optimized for peak performance.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">24/7 Monitoring</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Security Updates</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Performance Optimization</span>
-                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Technical Support</span>
-                        </div>
-                        <a href="services.html" class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                            Learn More <i data-lucide="arrow-right" class="w-4 h-4 text-green-400"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-                <!-- Projects Section -->
-        <section id="projects" class="py-24 relative">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 gs-reveal">
-                    <h2 class="text-brand-accent font-mono text-sm tracking-widest uppercase mb-4">Our Work</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold">Featured Projects</h3>
-                </div>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                    <!-- Project 1 -->
-                    <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer tilt-card gs-reveal-up">
-                        <div class="relative overflow-hidden aspect-video">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                 alt="AI Analytics Dashboard"
-                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-80"></div>
-                            <div class="absolute top-4 right-4">
-                                <span class="px-3 py-1 bg-brand-accent/90 text-xs text-white font-bold rounded-full uppercase tracking-wider">AI</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h4 class="text-xl font-bold mb-2 group-hover:text-brand-accent transition-colors">Nexus Analytics Platform</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                                Advanced AI-powered business intelligence dashboard with predictive analytics and real-time data visualization.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">React</span>
-                                <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Python</span>
-                                <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">TensorFlow</span>
-                            </div>
-                            <a href="projects.html#nexus" class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                                View Project <i data-lucide="arrow-up-right" class="w-4 h-4 text-brand-accent"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer tilt-card gs-reveal-up" style="animation-delay: 0.1s;">
-                        <div class="relative overflow-hidden aspect-video">
-                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                 alt="FinTech Mobile App"
-                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-80"></div>
-                            <div class="absolute top-4 right-4">
-                                <span class="px-3 py-1 bg-brand-secondary/90 text-xs text-white font-bold rounded-full uppercase tracking-wider">FinTech</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h4 class="text-xl font-bold mb-2 group-hover:text-brand-secondary transition-colors">Quantum Finance App</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                                Next-generation mobile banking application with blockchain integration and biometric security features.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Flutter</span>
-                                <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Node.js</span>
-                                <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Blockchain</span>
-                            </div>
-                            <a href="projects.html#quantum" class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                                View Project <i data-lucide="arrow-up-right" class="w-4 h-4 text-brand-secondary"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project 3 -->
-                    <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer tilt-card gs-reveal-up" style="animation-delay: 0.2s;">
-                        <div class="relative overflow-hidden aspect-video">
-                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                 alt="Healthcare Platform"
-                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-80"></div>
-                            <div class="absolute top-4 right-4">
-                                <span class="px-3 py-1 bg-green-500/90 text-xs text-white font-bold rounded-full uppercase tracking-wider">HealthTech</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h4 class="text-xl font-bold mb-2 group-hover:text-green-400 transition-colors">MediConnect Platform</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                                Comprehensive healthcare management system with telemedicine capabilities and AI diagnostics.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Vue.js</span>
-                                <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">AWS</span>
-                                <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">ML</span>
-                            </div>
-                            <a href="projects.html#mediconnect" class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                                View Project <i data-lucide="arrow-up-right" class="w-4 h-4 text-green-400"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center gs-reveal">
-                    <a href="projects.html" class="px-8 py-4 border border-brand-accent text-brand-accent text-lg font-bold uppercase tracking-wider rounded hover:bg-brand-accent hover:text-black transition-all duration-300 shadow-[0_0_10px_rgba(6,182,212,0.2)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] inline-flex items-center gap-2">
-                        View All Projects <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Technology Stack Marquee -->
-        <section id="tech" class="py-20 border-y border-gray-800 bg-brand-dark">
-            <div class="container mx-auto px-6 mb-10 text-center">
-                <p class="text-gray-400 text-sm uppercase tracking-widest">Powered by Modern Technology</p>
-            </div>
-
-            <!-- Seamless Continuous Loop Wrapper -->
-            <div class="marquee-container opacity-60 hover:opacity-100 transition-opacity duration-500">
-                <!-- Group 1 -->
-                <div class="marquee-content">
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="file-code"></i> React</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="terminal"></i> Node.js</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="box"></i> Three.js</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="database"></i> MongoDB</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="cloud"></i> AWS</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="cpu"></i> Python</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="layout"></i> Tailwind</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="smartphone"></i> Flutter</span>
-                </div>
-                <!-- Group 2 (Duplicate for loop) -->
-                <div class="marquee-content">
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="file-code"></i> React</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="terminal"></i> Node.js</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="box"></i> Three.js</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="database"></i> MongoDB</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="cloud"></i> AWS</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="cpu"></i> Python</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="layout"></i> Tailwind</span>
-                    <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i data-lucide="smartphone"></i> Flutter</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team Section -->
-                <!-- Team Section -->
-        <section id="team" class="py-24 relative overflow-hidden">
-            <div class="absolute top-1/2 right-0 w-96 h-96 bg-brand-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 gs-reveal">
-                    <h2 class="text-brand-accent font-mono text-sm tracking-widest uppercase mb-4">The Minds Behind</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold">Meet The Visionaries</h3>
-                </div>
-
-                <div class="flex flex-wrap justify-center gap-8">
-                    <!-- Founder Card -->
-                    <div class="w-full md:w-80 group gs-reveal-up">
-                        <div class="relative overflow-hidden rounded-xl aspect-[3/4]">
-                            <img src="images/adarsh.jpg" alt="Founder" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-90"></div>
-
-                            <!-- Socials Overlay -->
-                            <div class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-brand-dark/40 backdrop-blur-sm">
-                                <a href="https://www.linkedin.com/in/adarsh-madankar-08298a24b/" target="_blank" class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                                <a href="https://github.com/adarshmadankar45" target="_blank" class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-                                <a href="https://adarshmadankar45.github.io/portfolio/" target="_blank" class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i data-lucide="briefcase" class="w-5 h-5"></i></a>
-                            </div>
-
-                            <div class="absolute bottom-0 left-0 w-full p-6">
-                                <h4 class="text-2xl font-bold text-white mb-1">Adarsh Madankar</h4>
-                                <p class="text-brand-accent font-mono text-xs uppercase tracking-wider">Software Developer</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CTO Card -->
-                    <div class="w-full md:w-80 group gs-reveal-up" style="animation-delay: 0.2s;">
-                        <div class="relative overflow-hidden rounded-xl aspect-[3/4]">
-                            <img src="images/Kunal.jpg" alt="CTO" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-90"></div>
-
-                             <!-- Socials Overlay -->
-                             <div class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-brand-dark/40 backdrop-blur-sm">
-                                <a href="#" target="_blank" class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                                <a href="#" target="_blank" class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-                                <a href="https://kunal0034.github.io/Portfolio/" target="_blank" class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i data-lucide="briefcase" class="w-5 h-5"></i></a>
-                            </div>
-
-                            <div class="absolute bottom-0 left-0 w-full p-6">
-                                <h4 class="text-2xl font-bold text-white mb-1">Kunal Galande</h4>
-                                <p class="text-brand-secondary font-mono text-xs uppercase tracking-wider">Software Developer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-24 relative">
-            <div class="container mx-auto px-6">
-                <div class="glass-card rounded-3xl overflow-hidden border border-gray-800 shadow-2xl">
-                    <div class="grid lg:grid-cols-2">
-                        <!-- Contact Info -->
-                        <div class="p-10 md:p-14 bg-brand-primary/50 relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/10 rounded-full blur-[80px] pointer-events-none"></div>
-
-                            <h3 class="text-3xl font-display font-bold mb-6">Let's Build The Future</h3>
-                            <p class="text-gray-400 mb-10">Ready to transform your ideas into reality? Reach out to us for a consultation.</p>
-
-                            <div class="space-y-6">
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center border border-gray-700 text-brand-accent">
-                                        <i data-lucide="map-pin" class="w-5 h-5"></i>
-                                    </div>
-                                    <div>
-                                        <h5 class="text-white font-bold mb-1">Headquarters</h5>
-                                        <p class="text-gray-400 text-sm">123 Tech Park, Innovation Blvd,<br>Silicon Valley, CA 94025</p>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center border border-gray-700 text-brand-secondary">
-                                        <i data-lucide="mail" class="w-5 h-5"></i>
-                                    </div>
-                                    <div>
-                                        <h5 class="text-white font-bold mb-1">Email Us</h5>
-                                        <p class="text-gray-400 text-sm">hello@aikraft.tech</p>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center border border-gray-700 text-green-400">
-                                        <i data-lucide="phone" class="w-5 h-5"></i>
-                                    </div>
-                                    <div>
-                                        <h5 class="text-white font-bold mb-1">Call Us</h5>
-                                        <p class="text-gray-400 text-sm">+1 (555) 123-4567</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Form -->
-                        <div class="p-10 md:p-14 bg-white/5">
-                            <form>
-                                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                                    <div class="relative group">
-                                        <input type="text" required class="w-full bg-brand-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition-colors peer">
-                                        <label class="absolute left-4 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2.5 peer-focus:bg-brand-dark peer-focus:px-2 peer-focus:text-brand-accent peer-valid:-top-2.5 peer-valid:bg-brand-dark peer-valid:px-2 peer-valid:text-brand-accent pointer-events-none">First Name</label>
-                                    </div>
-                                    <div class="relative group">
-                                        <input type="text" required class="w-full bg-brand-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition-colors peer">
-                                        <label class="absolute left-4 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2.5 peer-focus:bg-brand-dark peer-focus:px-2 peer-focus:text-brand-accent peer-valid:-top-2.5 peer-valid:bg-brand-dark peer-valid:px-2 peer-valid:text-brand-accent pointer-events-none">Last Name</label>
-                                    </div>
-                                </div>
-                                <div class="relative group mb-6">
-                                    <input type="email" required class="w-full bg-brand-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition-colors peer">
-                                    <label class="absolute left-4 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2.5 peer-focus:bg-brand-dark peer-focus:px-2 peer-focus:text-brand-accent peer-valid:-top-2.5 peer-valid:bg-brand-dark peer-valid:px-2 peer-valid:text-brand-accent pointer-events-none">Email Address</label>
-                                </div>
-                                <div class="relative group mb-8">
-                                    <textarea rows="4" required class="w-full bg-brand-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition-colors peer"></textarea>
-                                    <label class="absolute left-4 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2.5 peer-focus:bg-brand-dark peer-focus:px-2 peer-focus:text-brand-accent peer-valid:-top-2.5 peer-valid:bg-brand-dark peer-valid:px-2 peer-valid:text-brand-accent pointer-events-none">Message</label>
-                                </div>
-                                <button type="submit" class="w-full btn-neon py-4 bg-brand-secondary/80 text-white font-bold rounded-lg uppercase tracking-wider hover:bg-brand-secondary transition-colors">
-                                    Send Message
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-brand-dark border-t border-gray-800 pt-20 pb-10">
+    <!-- About Section -->
+    <section id="about" class="py-24 relative">
         <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-12 mb-16">
-                <div class="col-span-1 md:col-span-2">
-                    <div class="flex items-center gap-2 mb-6">
-                        <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-brand-secondary to-brand-accent rounded shadow-lg">
-                            <span class="font-display font-bold text-white text-sm">AK</span>
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="relative gs-reveal-left">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-brand-accent to-brand-secondary opacity-30 blur-lg rounded-2xl"></div>
+                    <div class="relative rounded-2xl overflow-hidden border border-gray-800 bg-brand-dark aspect-video flex items-center justify-center group">
+                        <!-- Placeholder for an actual about image, using a pattern here -->
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-60 group-hover:scale-110 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
+                        <div class="relative z-10 p-8">
+                            <i data-lucide="code-2" class="w-16 h-16 text-brand-accent mb-4"></i>
+                            <h3 class="text-2xl font-bold text-white">Code Excellence</h3>
                         </div>
-                        <span class="font-display font-bold text-2xl text-white">AiKraft</span>
                     </div>
-                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-8">
-                        Pioneering the next era of digital intelligence. We build software that builds the future.
+                </div>
+
+                <div class="gs-reveal-right">
+                    <h2 class="text-brand-accent font-mono text-sm tracking-widest uppercase mb-4">About AiKraft</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold mb-6">Innovating Beyond Boundaries</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        At AiKraft Technologies, we don't just write code; we architect ecosystems. Born from a passion
+                        for Artificial Intelligence and seamless UX, we bridge the gap between human creativity and
+                        machine efficiency.
                     </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i data-lucide="facebook"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i data-lucide="twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i data-lucide="instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i data-lucide="linkedin"></i></a>
-                    </div>
-                </div>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        Our team comprises elite visionaries, full-stack engineers, and design thinkers dedicated to
+                        propelling your business into the future.
+                    </p>
 
-                <div>
-                    <h5 class="text-white font-bold mb-6">Quick Links</h5>
-                    <ul class="space-y-4 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-brand-accent transition-colors">Home</a></li>
-                        <li><a href="about.html" class="hover:text-brand-accent transition-colors">About Us</a></li>
-                        <li><a href="services.html" class="hover:text-brand-accent transition-colors">Services</a></li>
-                        <li><a href="projects.html" class="hover:text-brand-accent transition-colors">Project</a></li>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_#06B6D4]"></span>
+                            <span class="text-gray-300">AI-Integrated Workflows</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_#06B6D4]"></span>
+                            <span class="text-gray-300">Scalable Cloud Architectures</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_#06B6D4]"></span>
+                            <span class="text-gray-300">Immersive UI/UX Design</span>
+                        </li>
                     </ul>
                 </div>
-
-                <div>
-                    <h5 class="text-white font-bold mb-6">Legal</h5>
-                    <ul class="space-y-4 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-brand-accent transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-brand-accent transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-brand-accent transition-colors">Cookie Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-                <p>&copy; 2026 AiKraft Technologies. All rights reserved.</p>
-                <p>Designed with <span class="text-brand-accent">AiKraft</span></p>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-brand-primary/30 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 gs-reveal">
+                <h2 class="text-brand-accent font-mono text-sm tracking-widest uppercase mb-4">Our Expertise</h2>
+                <h3 class="text-4xl md:text-5xl font-display font-bold">Premium Services</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <!-- Updated: Web Design & Development Service -->
+                <div class="glass-card p-8 rounded-2xl group cursor-pointer tilt-card gs-reveal-up">
+                    <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 transition-colors">
+                        <i data-lucide="layout" class="w-8 h-8 text-brand-accent"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4 group-hover:text-brand-accent transition-colors">Web Design &
+                        Development</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        We create stunning, responsive websites that not only look incredible but perform exceptionally
+                        across all devices. Our designs blend aesthetics with functionality to deliver seamless user
+                        experiences.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Responsive Design</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">E-commerce</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">CMS Integration</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">SEO Optimization</span>
+                    </div>
+                    <a href="services.html"
+                       class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Learn More <i data-lucide="arrow-right" class="w-4 h-4 text-brand-accent"></i>
+                    </a>
+                </div>
+
+                <!-- Updated: Software Development -->
+                <div class="glass-card p-8 rounded-2xl group cursor-pointer tilt-card gs-reveal-up"
+                     style="animation-delay: 0.1s;">
+                    <div class="w-14 h-14 bg-brand-secondary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-secondary/20 transition-colors">
+                        <i data-lucide="code-2" class="w-8 h-8 text-brand-secondary"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4 group-hover:text-brand-secondary transition-colors">Software
+                        Development</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Bespoke software solutions engineered to solve your unique business challenges. From enterprise
+                        applications to specialized tools, we build scalable, secure, and high-performance software.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Web Applications</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Mobile Apps</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">API Development</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Database Design</span>
+                    </div>
+                    <a href="services.html"
+                       class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Learn More <i data-lucide="arrow-right" class="w-4 h-4 text-brand-secondary"></i>
+                    </a>
+                </div>
+
+                <!-- Updated: UI/UX Design -->
+                <div class="glass-card p-8 rounded-2xl group cursor-pointer tilt-card gs-reveal-up"
+                     style="animation-delay: 0.2s;">
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition-colors">
+                        <i data-lucide="palette" class="w-8 h-8 text-purple-400"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4 group-hover:text-purple-400 transition-colors">UI/UX Design</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        User-centered design that creates intuitive, engaging experiences. We combine research,
+                        psychology, and aesthetics to design interfaces that users love and businesses benefit from.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">User Research</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Wireframing</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Prototyping</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Usability Testing</span>
+                    </div>
+                    <a href="services.html"
+                       class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Learn More <i data-lucide="arrow-right" class="w-4 h-4 text-purple-400"></i>
+                    </a>
+                </div>
+
+                <!-- Updated: Maintenance & Support -->
+                <div class="glass-card p-8 rounded-2xl group cursor-pointer tilt-card gs-reveal-up">
+                    <div class="w-14 h-14 bg-green-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-500/20 transition-colors">
+                        <i data-lucide="settings" class="w-8 h-8 text-green-400"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4 group-hover:text-green-400 transition-colors">Maintenance &
+                        Support</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Ongoing support and maintenance to keep your digital solutions running smoothly. We ensure your
+                        applications stay updated, secure, and optimized for peak performance.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">24/7 Monitoring</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Security Updates</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Performance Optimization</span>
+                        <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Technical Support</span>
+                    </div>
+                    <a href="services.html"
+                       class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Learn More <i data-lucide="arrow-right" class="w-4 h-4 text-green-400"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 gs-reveal">
+                <h2 class="text-brand-accent font-mono text-sm tracking-widest uppercase mb-4">Our Work</h2>
+                <h3 class="text-4xl md:text-5xl font-display font-bold">Featured Projects</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Project 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer tilt-card gs-reveal-up">
+                    <div class="relative overflow-hidden aspect-video">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             alt="AI Analytics Dashboard"
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-80"></div>
+                        <div class="absolute top-4 right-4">
+                            <span class="px-3 py-1 bg-brand-accent/90 text-xs text-white font-bold rounded-full uppercase tracking-wider">AI</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2 group-hover:text-brand-accent transition-colors">Nexus
+                            Analytics Platform</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Advanced AI-powered business intelligence dashboard with predictive analytics and real-time
+                            data visualization.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">React</span>
+                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Python</span>
+                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">TensorFlow</span>
+                        </div>
+                        <a href="projects.html#nexus"
+                           class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
+                            View Project <i data-lucide="arrow-up-right" class="w-4 h-4 text-brand-accent"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer tilt-card gs-reveal-up"
+                     style="animation-delay: 0.1s;">
+                    <div class="relative overflow-hidden aspect-video">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             alt="FinTech Mobile App"
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-80"></div>
+                        <div class="absolute top-4 right-4">
+                            <span class="px-3 py-1 bg-brand-secondary/90 text-xs text-white font-bold rounded-full uppercase tracking-wider">FinTech</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2 group-hover:text-brand-secondary transition-colors">Quantum
+                            Finance App</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Next-generation mobile banking application with blockchain integration and biometric
+                            security features.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Flutter</span>
+                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Node.js</span>
+                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Blockchain</span>
+                        </div>
+                        <a href="projects.html#quantum"
+                           class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
+                            View Project <i data-lucide="arrow-up-right" class="w-4 h-4 text-brand-secondary"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer tilt-card gs-reveal-up"
+                     style="animation-delay: 0.2s;">
+                    <div class="relative overflow-hidden aspect-video">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             alt="Healthcare Platform"
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-80"></div>
+                        <div class="absolute top-4 right-4">
+                            <span class="px-3 py-1 bg-green-500/90 text-xs text-white font-bold rounded-full uppercase tracking-wider">HealthTech</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2 group-hover:text-green-400 transition-colors">MediConnect
+                            Platform</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Comprehensive healthcare management system with telemedicine capabilities and AI
+                            diagnostics.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">Vue.js</span>
+                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">AWS</span>
+                            <span class="px-2 py-1 bg-brand-dark text-xs text-gray-400 rounded border border-gray-800">ML</span>
+                        </div>
+                        <a href="projects.html#mediconnect"
+                           class="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
+                            View Project <i data-lucide="arrow-up-right" class="w-4 h-4 text-green-400"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center gs-reveal">
+                <a href="projects.html"
+                   class="px-8 py-4 border border-brand-accent text-brand-accent text-lg font-bold uppercase tracking-wider rounded hover:bg-brand-accent hover:text-black transition-all duration-300 shadow-[0_0_10px_rgba(6,182,212,0.2)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] inline-flex items-center gap-2">
+                    View All Projects <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Marquee -->
+    <section id="tech" class="py-20 border-y border-gray-800 bg-brand-dark">
+        <div class="container mx-auto px-6 mb-10 text-center">
+            <p class="text-gray-400 text-sm uppercase tracking-widest">Powered by Modern Technology</p>
+        </div>
+
+        <!-- Seamless Continuous Loop Wrapper -->
+        <div class="marquee-container opacity-60 hover:opacity-100 transition-opacity duration-500">
+            <!-- Group 1 -->
+            <div class="marquee-content">
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="file-code"></i> Python</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="terminal"></i>js</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="box"></i> Django</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="database"></i> MySql</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="cloud"></i> AWS</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="cpu"></i> Css</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="layout"></i> Tailwind</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="smartphone"></i> Html</span>
+            </div>
+            <!-- Group 2 (Duplicate for loop) -->
+            <div class="marquee-content">
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="file-code"></i> Python</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="terminal"></i>js</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="box"></i> Django</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="database"></i> MySql</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="cloud"></i> AWS</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="cpu"></i> Css</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="layout"></i> Tailwind</span>
+                <span class="tech-item text-4xl font-bold text-gray-500 flex items-center gap-2"><i
+                        data-lucide="smartphone"></i> Html</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <!-- Team Section -->
+    <section id="team" class="py-24 relative overflow-hidden">
+        <div class="absolute top-1/2 right-0 w-96 h-96 bg-brand-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 gs-reveal">
+                <h2 class="text-brand-accent font-mono text-sm tracking-widest uppercase mb-4">The Minds Behind</h2>
+                <h3 class="text-4xl md:text-5xl font-display font-bold">Meet The Visionaries</h3>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-8">
+                <!-- Founder Card -->
+                <div class="w-full md:w-80 group gs-reveal-up">
+                    <div class="relative overflow-hidden rounded-xl aspect-[3/4]">
+                        <img src="images/adarsh.jpg" alt="Founder"
+                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-90"></div>
+
+                        <!-- Socials Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-brand-dark/40 backdrop-blur-sm">
+                            <a href="https://www.linkedin.com/in/adarsh-madankar-08298a24b/" target="_blank"
+                               class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i
+                                    data-lucide="linkedin" class="w-5 h-5"></i></a>
+                            <a href="https://github.com/adarshmadankar45" target="_blank"
+                               class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i
+                                    data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="https://adarshmadankar45.github.io/portfolio/" target="_blank"
+                               class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i
+                                    data-lucide="briefcase" class="w-5 h-5"></i></a>
+                        </div>
+
+                        <div class="absolute bottom-0 left-0 w-full p-6">
+                            <h4 class="text-2xl font-bold text-white mb-1">Adarsh Madankar</h4>
+                            <p class="text-brand-accent font-mono text-xs uppercase tracking-wider">Software
+                                Developer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTO Card -->
+                <div class="w-full md:w-80 group gs-reveal-up" style="animation-delay: 0.2s;">
+                    <div class="relative overflow-hidden rounded-xl aspect-[3/4]">
+                        <img src="images/Kunal.jpg" alt="CTO"
+                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-90"></div>
+
+                        <!-- Socials Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-brand-dark/40 backdrop-blur-sm">
+                            <a href="https://www.linkedin.com/in/kunal-galande-5b4b69288/" target="_blank"
+                               class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i
+                                    data-lucide="linkedin" class="w-5 h-5"></i></a>
+                            <a href="https://github.com/kunal0034" target="_blank"
+                               class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i
+                                    data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="https://kunal0034.github.io/Portfolio/" target="_blank"
+                               class="p-2 bg-white text-black rounded-full hover:bg-brand-accent transition-colors"><i
+                                    data-lucide="briefcase" class="w-5 h-5"></i></a>
+                        </div>
+
+                        <div class="absolute bottom-0 left-0 w-full p-6">
+                            <h4 class="text-2xl font-bold text-white mb-1">Kunal Galande</h4>
+                            <p class="text-brand-secondary font-mono text-xs uppercase tracking-wider">Software
+                                Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="glass-card rounded-3xl overflow-hidden border border-gray-800 shadow-2xl">
+                <div class="grid lg:grid-cols-2">
+                    <!-- Contact Info -->
+                    <div class="p-10 md:p-14 bg-brand-primary/50 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+                        <h3 class="text-3xl font-display font-bold mb-6">Let's Build The Future</h3>
+                        <p class="text-gray-400 mb-10">Ready to transform your ideas into reality? Reach out to us for a
+                            consultation.</p>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center border border-gray-700 text-brand-accent">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white font-bold mb-1">Headquarters</h5>
+                                    <p class="text-gray-400 text-sm">Plot No. 3 Saubhagya Nagar, Ramesh Estate,<br> Besa
+                                        Ghogali Road,Nagpur-440037</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center border border-gray-700 text-brand-secondary">
+                                    <i data-lucide="mail" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white font-bold mb-1">Email Us</h5>
+                                    <p class="text-gray-400 text-sm">aikrafttechnologies@gmail.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center border border-gray-700 text-green-400">
+                                    <i data-lucide="phone" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white font-bold mb-1">Call Us</h5>
+                                    <p class="text-gray-400 text-sm">7083993099 / 9096174233</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <!-- Form -->
+                    <div class="p-10 md:p-14 bg-white/5">
+                        <form id="contact-form">
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div class="relative group">
+                                    <input type="text" name="firstName" required
+                                           class="w-full bg-brand-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition-colors peer">
+                                    <label class="absolute left-4 top-3 text-gray-500 text-sm transition-all pointer-events-none">First
+                                        Name</label>
+                                </div>
+                                <div class="relative group">
+                                    <input type="text" name="lastName" required
+                                           class="w-full bg-brand-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition-colors peer">
+                                    <label class="absolute left-4 top-3 text-gray-500 text-sm transition-all pointer-events-none">Last
+                                        Name</label>
+                                </div>
+                            </div>
+                            <div class="relative group mb-6">
+                                <input type="email" name="email" required
+                                       class="w-full bg-brand-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition-colors peer">
+                                <label class="absolute left-4 top-3 text-gray-500 text-sm transition-all pointer-events-none">Email
+                                    Address</label>
+                            </div>
+                            <div class="relative group mb-8">
+                                <textarea name="message" rows="4" required
+                                          class="w-full bg-brand-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition-colors peer"></textarea>
+                                <label class="absolute left-4 top-3 text-gray-500 text-sm transition-all pointer-events-none">Message</label>
+                            </div>
+                            <button type="submit"
+                                    class="w-full btn-neon py-4 bg-brand-secondary/80 text-white font-bold rounded-lg uppercase tracking-wider hover:bg-brand-secondary transition-colors">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-brand-dark border-t border-gray-800 pt-20 pb-10">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-brand-secondary to-brand-accent rounded shadow-lg">
+                        <span class="font-display font-bold text-white text-sm">AK</span>
+                    </div>
+                    <span class="font-display font-bold text-2xl text-white">AiKraft</span>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-8">
+                    Pioneering the next era of digital intelligence. We build software that builds the future.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i
+                            data-lucide="facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i
+                            data-lucide="twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i
+                            data-lucide="instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i
+                            data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h5 class="text-white font-bold mb-6">Quick Links</h5>
+                <ul class="space-y-4 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-brand-accent transition-colors">Home</a></li>
+                    <li><a href="about.html" class="hover:text-brand-accent transition-colors">About Us</a></li>
+                    <li><a href="services.html" class="hover:text-brand-accent transition-colors">Services</a></li>
+                    <li><a href="projects.html" class="hover:text-brand-accent transition-colors">Project</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="text-white font-bold mb-6">Legal</h5>
+                <ul class="space-y-4 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-brand-accent transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition-colors">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition-colors">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+            <p>&copy; 2026 AiKraft Technologies. All rights reserved.</p>
+            <p>Designed with <span class="text-brand-accent">AiKraft</span></p>
+        </div>
+    </div>
+</footer>
+<!-- Email Modal -->
+<div id="email-modal" class="fixed inset-0 bg-black/70 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full rounded-2xl border border-gray-700 p-8 relative">
+        <!-- Close Button -->
+        <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+
+        <!-- Modal Content -->
+        <div class="text-center">
+            <!-- Icon -->
+            <div class="w-16 h-16 bg-brand-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="mail" class="w-8 h-8 text-brand-accent"></i>
+            </div>
+
+            <!-- Title -->
+            <h3 class="text-2xl font-display font-bold text-white mb-4">Message Ready to Send</h3>
+
+            <!-- Description -->
+            <p class="text-gray-400 mb-6 leading-relaxed">
+                Your message has been prepared! To ensure delivery, please send it directly via email.
+            </p>
+
+            <!-- Email Display -->
+            <div class="bg-brand-dark border border-gray-700 rounded-lg p-4 mb-6">
+                <p class="text-sm text-gray-400 mb-1">Send to:</p>
+                <p class="text-brand-accent font-mono text-lg font-bold">aikrafttechnologies@gmail.com</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3">
+                <!-- Copy Email Button -->
+                <button id="copy-email"
+                        class="flex-1 px-6 py-3 bg-brand-accent/10 border border-brand-accent text-brand-accent font-bold rounded-lg hover:bg-brand-accent hover:text-black transition-all duration-300 flex items-center justify-center gap-2">
+                    <i data-lucide="copy" class="w-4 h-4"></i>
+                    Copy Email
+                </button>
+
+                <!-- Open Email Client Button -->
+                <button id="open-email"
+                        class="flex-1 px-6 py-3 bg-brand-accent text-black font-bold rounded-lg hover:bg-brand-accent/90 transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    Open Email
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="js/index.js"></script>
 </body>

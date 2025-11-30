@@ -210,3 +210,173 @@
             transform: scale(1.1);
             box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
         }
+        /* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    /* Mobile Menu Styling */
+    #mobile-menu {
+        display: flex !important;
+    }
+
+    /* Container padding adjustment for mobile */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Typography scaling for mobile */
+    h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+
+    h2 {
+        font-size: 2rem !important;
+    }
+
+    h3 {
+        font-size: 1.75rem !important;
+    }
+
+    /* Hero section adjustments */
+    .hero-stats {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    /* Service cards full width on mobile */
+    .service-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Project cards full width on mobile */
+    .project-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Team cards full width on mobile */
+    .team-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Contact form adjustments */
+    .contact-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Footer adjustments */
+    .footer-grid {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+    }
+
+    /* Button sizing for mobile */
+    .btn-neon, .glass-card {
+        padding: 0.75rem 1.5rem !important;
+    }
+
+    /* Reduce glow effects on mobile for performance */
+    .glass-card:hover {
+        transform: translateY(-2px);
+    }
+}
+
+/* Tablet Responsive Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Tablet grid adjustments */
+    .service-grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    /* Typography scaling for tablet */
+    h1 {
+        font-size: 3.5rem !important;
+    }
+
+    /* Container padding adjustment for tablet */
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+/* Mobile menu specific fixes */
+@media (max-width: 768px) {
+    #mobile-menu a {
+        font-size: 1.5rem !important;
+        padding: 0.5rem 0;
+    }
+
+    /* Ensure mobile menu is properly positioned */
+    #mobile-menu {
+        z-index: 9999;
+    }
+
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
+    }
+}
+
+/* Fix for mobile navigation toggle */
+.mobile-menu-btn {
+    display: block !important;
+}
+
+@media (min-width: 769px) {
+    .mobile-menu-btn {
+        display: none !important;
+    }
+
+    #mobile-menu {
+        display: none !important;
+    }
+}
+/* Email Modal Styles */
+#email-modal {
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Form input styles for the floating labels */
+.relative.group input:focus ~ label,
+.relative.group input:valid ~ label,
+.relative.group textarea:focus ~ label,
+.relative.group textarea:valid ~ label {
+    top: -0.5rem;
+    background: #050B14;
+    padding: 0 0.5rem;
+    color: #06B6D4;
+    font-size: 0.75rem;
+}
+
+/* Ensure form inputs have proper styling */
+.relative.group input,
+.relative.group textarea {
+    background: #0F172A;
+    border: 1px solid #374151;
+}
+
+.relative.group input:focus,
+.relative.group textarea:focus {
+    border-color: #06B6D4;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
