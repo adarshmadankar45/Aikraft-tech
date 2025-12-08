@@ -327,16 +327,12 @@
 
 /* Fix for mobile navigation toggle */
 .mobile-menu-btn {
-    display: block !important;
+    display: block;
 }
 
 @media (min-width: 769px) {
     .mobile-menu-btn {
-        display: none !important;
-    }
-
-    #mobile-menu {
-        display: none !important;
+        display: none;
     }
 }
 /* Email Modal Styles */
@@ -379,4 +375,77 @@
     border-color: #06B6D4;
     outline: none;
     box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+/* Fix Mobile Menu Styling */
+#mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(5, 11, 20, 0.98);
+    backdrop-filter: blur(20px);
+    z-index: 9998;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+#mobile-menu.translate-x-full {
+    transform: translateX(100%);
+}
+
+#mobile-menu:not(.translate-x-full) {
+    transform: translateX(0);
+}
+
+/* Mobile Menu Links */
+#mobile-menu a {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    margin: 1rem 0;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#mobile-menu a:hover {
+    color: #06B6D4;
+    background: rgba(6, 182, 212, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Mobile Menu Close Button */
+#mobile-menu button {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+/* Mobile Menu Open State */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Show Mobile Menu on Mobile Only */
+@media (max-width: 768px) {
+    #mobile-menu {
+        display: flex;
+    }
+}
+
+/* Hide Mobile Menu on Desktop */
+@media (min-width: 769px) {
+    #mobile-menu {
+        display: none !important;
+    }
 }

@@ -14,22 +14,24 @@ window.addEventListener('load', () => {
 });
 
 // Mobile Menu Function
+// Mobile Menu Function
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
-    const isOpen = !menu.classList.contains('translate-x-full');
+    const isOpen = menu.classList.contains('translate-x-full');
 
-    menu.classList.toggle('translate-x-full');
-
-    // Toggle body scroll and add/remove menu-open class
     if (isOpen) {
-        document.body.style.overflow = 'auto';
-        document.body.classList.remove('menu-open');
-    } else {
+        // Open menu
+        menu.classList.remove('translate-x-full');
         document.body.style.overflow = 'hidden';
         document.body.classList.add('menu-open');
+    } else {
+        // Close menu
+        menu.classList.add('translate-x-full');
+        document.body.style.overflow = 'auto';
+        document.body.classList.remove('menu-open');
     }
 
-    // Re-initialize icons after menu toggle (for any new icons)
+    // Re-initialize icons after menu toggle
     lucide.createIcons();
 }
 
@@ -47,6 +49,13 @@ document.addEventListener('keydown', (e) => {
         if (!menu.classList.contains('translate-x-full')) {
             toggleMobileMenu();
         }
+    }
+});
+
+// Close mobile menu when clicking outside (on the backdrop)
+document.getElementById('mobile-menu').addEventListener('click', (e) => {
+    if (e.target.id === 'mobile-menu') {
+        toggleMobileMenu();
     }
 });
 
