@@ -285,7 +285,71 @@
         </div>
     </div>
 </footer>
+<!-- WhatsApp Floating Button - Professional -->
+<div id="whatsapp-button" class="fixed bottom-8 right-8 z-50 animate-fade-in">
+    <div class="relative group">
+        <!-- WhatsApp Icon Container -->
+        <a href="https://wa.me/917083993099?text=Hi%20AiKraft%20Technologies!%20I'm%20interested%20in%20your%20services."
+           target="_blank"
+           rel="noopener noreferrer"
+           class="whatsapp-btn-wrapper relative flex items-center justify-center bg-gradient-to-br from-[#25D366] via-[#25D366] to-[#128C7E] rounded-full shadow-2xl shadow-[#25D366]/40 hover:shadow-[#25D366]/60 transition-all duration-500 hover:scale-110 active:scale-95 group-hover:shadow-[0_0_35px_rgba(37,211,102,0.7)] overflow-hidden animate-float">
 
+            <!-- Official WhatsApp Logo -->
+            <div class="relative w-16 h-16 flex items-center justify-center">
+                <!-- Animated Outer Ring -->
+                <div class="absolute inset-[-2px] rounded-full border-2 border-[#25D366]/40 animate-ping-slow"></div>
+
+                <!-- WhatsApp Official Logo -->
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 relative z-10">
+                    <!-- WhatsApp Circle Background -->
+                    <circle cx="16" cy="16" r="14" fill="#25D366"/>
+
+                    <!-- WhatsApp Chat Bubble -->
+                    <path d="M22.88 9.12a9.76 9.76 0 0 0-15.52 11.6L6 26l5.28-1.36a9.72 9.72 0 0 0 4.68 1.2h.04a9.76 9.76 0 0 0 6.88-16.72zm-6.88 15.6a8.08 8.08 0 0 1-4.12-1.12l-.32-.2-3.36.88.88-3.28-.2-.32a8.28 8.28 0 0 1-1.28-4.4 8.24 8.24 0 1 1 8.24 8.24z" fill="#fff"/>
+
+                    <!-- WhatsApp Phone Icon Inside -->
+                    <path d="M21.2 18.48c-.24-.12-1.4-.68-1.6-.76-.2-.08-.36-.12-.52.12-.16.24-.64.76-.8.92-.16.16-.32.18-.56.06-.24-.12-1.04-.4-1.96-1.24-.72-.64-1.2-1.44-1.36-1.68-.16-.24-.04-.36.12-.48.12-.12.24-.28.36-.44.12-.16.16-.24.24-.4.08-.16.04-.3-.04-.44-.08-.12-.52-1.28-.72-1.76-.2-.48-.4-.4-.52-.4-.16 0-.32 0-.48.04-.16.04-.44.2-.68.96-.24.76-.92 2.64-.92 2.64s-.96 2.56 3.68 5.44c4.64 2.88 5.44 2.24 6.4 2.08.96-.16 3.2-1.32 3.64-2.6.44-1.28.44-2.36.36-2.6-.08-.24-.32-.4-.68-.56z" fill="#fff"/>
+                </svg>
+
+                <!-- Inner Glow -->
+                <div class="absolute inset-0 rounded-full bg-white/10 blur-[2px] animate-pulse-gentle"></div>
+            </div>
+
+            <!-- Animated Notification Dot -->
+            <div class="absolute -top-1 -right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center animate-bounce-slow shadow-lg border-2 border-[#25D366]">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-[#25D366]">
+                    <path d="M8 12L10.5 14.5L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <!-- Hover Effect Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-br from-white/0 via-white/0 to-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </a>
+
+        <!-- Professional Tooltip -->
+        <div class="whatsapp-tooltip absolute right-20 top-1/2 -translate-y-1/2 bg-gray-900/95 backdrop-blur-xl text-white px-5 py-4 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 pointer-events-none whitespace-nowrap border border-gray-700/50">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 bg-[#25D366] rounded-full flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" fill="white" class="w-4 h-4">
+                        <path d="M12 2C6.48 2 2 6.48 2 12c0 1.7.45 3.3 1.24 4.68L2 22l5.32-1.24C8.7 21.55 10.3 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.5 14.5l-4.67-4.67-5.33 2.67 5.33-2.67 4.67 4.67 2.67-5.33-2.67 5.33z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white">WhatsApp Chat</h4>
+                    <p class="text-xs text-gray-300">Usually replies in minutes</p>
+                </div>
+            </div>
+            <div class="text-sm font-medium text-white mb-1">Chat with our team</div>
+            <div class="text-xs text-gray-400">Get instant answers to your questions</div>
+
+            <!-- Tooltip Arrow -->
+            <div class="absolute right-[-8px] top-1/2 -translate-y-1/2 w-4 h-4 bg-gray-900/95 rotate-45 border-r border-b border-gray-700/50"></div>
+        </div>
+
+        <!-- Click Feedback Effect -->
+        <div class="absolute inset-0 rounded-full bg-white/20 scale-0 group-active:scale-100 transition-transform duration-200 pointer-events-none"></div>
+    </div>
+</div>
 <script src="js/index.js"></script>
 </body>
 </html>

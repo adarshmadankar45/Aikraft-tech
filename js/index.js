@@ -428,3 +428,107 @@ document.addEventListener('DOMContentLoaded', function() {
 document.querySelector('#contact form')?.addEventListener('submit', function(e) {
     e.preventDefault();
 });
+
+// WhatsApp Button Professional Interactions
+document.addEventListener('DOMContentLoaded', function() {
+    const whatsappButton = document.getElementById('whatsapp-button');
+    const whatsappLink = document.querySelector('.whatsapp-btn-wrapper');
+
+    if (!whatsappButton || !whatsappLink) return;
+
+    // Add click animation
+    whatsappLink.addEventListener('click', function(e) {
+        // Prevent multiple rapid clicks
+        if (this.classList.contains('clicked')) return;
+        this.classList.add('clicked');
+
+        // Add professional click animation
+        this.style.transform = 'scale(0.85)';
+        this.style.transition = 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+
+        // Add click sound effect (optional)
+        try {
+            const clickSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
+            clickSound.volume = 0.3;
+            clickSound.play().catch(() => {});
+        } catch (e) {}
+
+        // Analytics tracking
+        setTimeout(() => {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'whatsapp_click', {
+                    'event_category': 'engagement',
+                    'event_label': 'whatsapp_chat'
+                });
+            }
+        }, 100);
+
+        // Reset after animation
+        setTimeout(() => {
+            this.classList.remove('clicked');
+            this.style.transform = '';
+            this.style.transition = '';
+        }, 200);
+
+        // Let the link navigate naturally
+    });
+
+    // Add mouseenter/mouseleave effects
+    whatsappLink.addEventListener('mouseenter', function() {
+        // Increase animation speed on hover
+        const outerRing = this.querySelector('.animate-ping-slow');
+        if (outerRing) {
+            outerRing.style.animationDuration = '1.5s';
+        }
+    });
+
+    whatsappLink.addEventListener('mouseleave', function() {
+        // Reset animation speed
+        const outerRing = this.querySelector('.animate-ping-slow');
+        if (outerRing) {
+            outerRing.style.animationDuration = '2s';
+        }
+    });
+
+    // Add keyboard navigation support
+    whatsappLink.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+        }
+    });
+
+    // Make button visible after page load with animation
+    setTimeout(() => {
+        whatsappButton.style.opacity = '1';
+        whatsappButton.style.transform = 'translateY(0) scale(1)';
+        whatsappButton.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    }, 1200);
+
+    // Add scroll effect (subtle parallax)
+    let lastScroll = 0;
+    window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        const scrollDiff = currentScroll - lastScroll;
+
+        // Subtle movement based on scroll
+        whatsappButton.style.transform = `translateY(${Math.min(scrollDiff * 0.2, 10)}px)`;
+
+        lastScroll = currentScroll;
+
+        // Reset position after scroll stops
+        clearTimeout(window.whatsappScrollTimeout);
+        window.whatsappScrollTimeout = setTimeout(() => {
+            whatsappButton.style.transform = 'translateY(0)';
+        }, 100);
+    });
+
+    // Add touch feedback for mobile
+    whatsappLink.addEventListener('touchstart', function() {
+        this.style.transform = 'scale(0.95)';
+    }, { passive: true });
+
+    whatsappLink.addEventListener('touchend', function() {
+        this.style.transform = '';
+    }, { passive: true });
+});
